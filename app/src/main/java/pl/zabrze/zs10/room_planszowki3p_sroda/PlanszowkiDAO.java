@@ -12,9 +12,15 @@ public interface PlanszowkiDAO {
     @Insert
     void wstawPlanszowkeDoBazy(Planszowka planszowka);
 
+    @Insert
+    void wstawKilkaPlanszowek (Planszowka ...planszowkas);
+
     @Delete
     void usunZBazy(Planszowka planszowka);
 
     @Query("Select * from planszowki")
     List<Planszowka> wszystkiePlanszowkiZBazy();
+
+    @Query("Select * from planszowki where :liczbaGraczy>=min and :liczbaGraczy<=max")
+    List<Planszowka> planszowkiWedlugLiczbyGraczy(int liczbaGraczy);
 }
