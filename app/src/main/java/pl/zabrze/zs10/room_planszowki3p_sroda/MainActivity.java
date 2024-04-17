@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    List<Planszowka> wszystkiePlanszowki;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         //db.uzyjPlanszowkiDao().wstawPlanszowkeDoBazy(p2);
         //db.uzyjPlanszowkiDao().wstawPlanszowkeDoBazy(p3);
 
-        List<Planszowka> wszystkiePlanszowki = db.uzyjPlanszowkiDao().wszystkiePlanszowkiZBazy();
+        wszystkiePlanszowki = db.uzyjPlanszowkiDao().wszystkiePlanszowkiZBazy();
         ArrayAdapter<Planszowka> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
                         db.uzyjPlanszowkiDao().usunZBazy(planszowka);
                         //TODO dlaczego się nie odświeża
                         //dlaczego w bazie zmiana a tu nie widze
-                        //ViewModel
+                        //ViewModel https://developer.android.com/codelabs/android-room-with-a-view#1
+
+                        //to rozwiazanie to wiocha !!!!!!
+                        wszystkiePlanszowki = db.uzyjPlanszowkiDao().wszystkiePlanszowkiZBazy();
+                        adapter.notifyDataSetChanged();
                     }
                 }
         );
